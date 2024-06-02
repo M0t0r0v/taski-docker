@@ -170,8 +170,6 @@ jobs:
     # Копируем docker-compose.production.yml на продакшен-сервер
     - name: Copy docker-compose.yml via ssh
       uses: appleboy/scp-action@master
-    - name: Delay befor deploy2
-      run: sleep 600
     # Передаём параметры для action appleboy/scp-action:
       with:
         host: ${{ secrets.HOST }}
@@ -203,4 +201,4 @@ jobs:
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
           sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
         timeout: 3000s
-        command_timeout: 3000s  
+        command_timeout: 3000s
