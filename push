@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Variables
+LOCAL_IMAGE="taski_frontend:latest"
+MIRROR_REGISTRY="https://dockerhub.timeweb.cloud"
+NAMESPACE="motorov"
+REMOTE_IMAGE="${MIRROR_REGISTRY}/${NAMESPACE}/taski_frontend"
+
+# Login to the mirror registry (if needed)
+docker login ${MIRROR_REGISTRY}
+
+# Tag the local image
+docker tag ${LOCAL_IMAGE} ${REMOTE_IMAGE}
+
+# Push the image to the mirror
+docker push ${REMOTE_IMAGE}
+
+# Logout from the mirror registry (optional)
+docker logout ${MIRROR_REGISTRY}
